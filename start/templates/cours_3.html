@@ -1,0 +1,204 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="w3-row w3-padding-64" style="font-size:20px">
+    <h1 class="w3-text-teal">Правило перевода целых десятичных чисел в систему счисления с основанием q</h1>
+    <div class="w3-third w3-container">
+      <p>Для перевода целого десятичного числа в систему счисления с основанием q следует:</p>
+      <ul>
+          <li>1) последовательно выполнять деление данного числа и получаемых целых частных на основание новой системы
+                счисления до тех пор, пока не получим частное, равное нулю;</li>
+          <li>2) полученные остатки, являющиеся цифрами числа в новой системе счисления, привести в соответствие с алфавитом
+                новой системы счисления;</li>
+          <li>3) составить число в новой системе счисления, записывая его, начиная с последнего полученного остатка.</li>
+      </ul>
+      <p>Представим таблицу соответствия десятичных, двоичных, восьмеричных и шестнадцатеричных чисел от 0 до 20.</p><!--<strong>10</strong> -->
+    </div>
+    <div class="w3-twothird w3-container">
+      <br><br>
+      <p class=" w3-padding-large w3-padding-32 w3-center"> <img src="/static/3.jpeg" style="width:624px;height:770px;"></p>
+    </div>
+  </div>
+
+  <div class="w3-row" style="font-size:20px">
+    <div class="w3-half w3-container">
+       <h1 class="w3-text-teal"> Двоичная арифметика</strong></h1>
+       <p>Арифметика двоичной системы счисления основывается на использовании следующих таблиц сложения и умножения:</p>
+       <p><strong>Пример 8.</strong>&nbsp;Таблица двоичного сложения предельно проста. Так как 1 + 1 = 10, то 0 остаётся в
+       младшем разряде, а 1 переносится в старший разряд.</p>
+       <p>Таким образом, в двоичной системе счисления умножение сводится к сдвигам множимого и сложениям.</p>
+       <p><strong>Пример 9.</strong>&nbsp;Операция умножения двоичных чисел выполняется по обычной схеме, применяемой в
+       десятичной системе счисления, с последовательным умножением множимого на очередную цифру множителя.</p>
+    </div>
+    <div class="w3-half w3-container">
+       <p class="w3-padding-large w3-padding-32 w3-center"> <img src="/static/4.jpeg" style="width:393px;height:118px;"></p>
+       <p class=" w3-padding-large w3-padding-32 w3-center"> <img src="/static/5.jpeg" style="width:466px;height:115px;"></p>
+       <p class=" w3-padding-large w3-padding-32 w3-center"> <img src="/static/6.jpeg" style="width:286px;height:174px;"></p>
+    </div>
+  </div>
+
+  <div class="w3-row w3-padding-64" style="font-size:20px">
+    <div class=" w3-container">
+      <h1 class="w3-text-teal">Самое главное о системе счисления</h1>
+      <p><strong>Система счисления</strong>&nbsp;— это знаковая система, в которой приняты определённые правила записи чисел.
+      Знаки, с помощью которых записываются числа, называются цифрами, а их совокупность — алфавитом системы счисления.
+      </p>
+      <p>Система счисления называется позиционной, если количественный эквивалент цифры зависит от её положения (позиции) в
+      записи числа. Основание позиционной системы счисления равно количеству цифр, составляющих её алфавит.</p>
+      <p>Основанием позиционной системы счисления может служить любое натуральное число q &gt; 1.</p>
+      <p>В позиционной системе счисления с основанием q любое число может быть представлено в виде:</p>
+      <ul>
+          <li><strong>А<sub>q</sub>&nbsp;= ± (а<sub>n-1</sub>&nbsp;• q<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;•
+            q<sup>n-2</sup>&nbsp;+ … + а<sub>0</sub>&nbsp;• q<sup>0</sup>&nbsp;+ а<sub>-1</sub>&nbsp;•
+            q<sup>-1</sup>&nbsp;+ … + а<sub>-m</sub>&nbsp;• q<sup>-m</sup>).&nbsp; &nbsp; &nbsp; (1)</strong></li>
+      </ul>
+      <p>Где:</p>
+       <ul> <li>А — число;</li> <li>q — основание системы счисления;</li> <li>а<sub>i</sub>&nbsp;— цифры, принадлежащие алфавиту данной системы счисления;</li> <li>n — количество целых разрядов числа;</li> <li>m — количество дробных разрядов числа;</li> <li>q<sup>i</sup>&nbsp;— «вес» i-го разряда.</li> </ul>
+    </div>
+  </div>
+
+<p class="w3-text-teal" style="font-size:30px">Тест для самоконтроля</p>
+{% if current_user.has_role('student') %}
+    <form id = "quiz" action="/course3" method="post">
+        <div style="font-size:18px">
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 1: Совокупность знаков, с помощью которых записываются числа, называется:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q1" id="q1_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q1_1" data-mdb-ripple-init>системой счисления</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q1_2" data-mdb-ripple-init>цифрами системы счисления</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q1_3" data-mdb-ripple-init>алфавитом системы счисления</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q1_4" data-mdb-ripple-init> основанием системы счисления</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 2: Какой из символов не используется при записи чисел в шестнадцатеричной системе счисления??</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q2" id="q2_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q2_1" data-mdb-ripple-init>A</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q2_2" data-mdb-ripple-init>S</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q2_3" data-mdb-ripple-init>D</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q2_4" data-mdb-ripple-init>F</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 3: При вычитании из числа 11011 двоичного числа 1101 будет получено:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q3" id="q3_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q3_1" data-mdb-ripple-init>1101</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q3_2" data-mdb-ripple-init>1100</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q3_3" data-mdb-ripple-init>1111</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q3_4" data-mdb-ripple-init>1110</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 4: Умножение двоичных чисел 110 и 111 даст в результате число:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q4" id="q4_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q4_1" data-mdb-ripple-init>101011</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q4_2" data-mdb-ripple-init>101010</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q4_3" data-mdb-ripple-init>11011</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q4_4" data-mdb-ripple-init>101101</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 5: В позиционной системе счисления с основанием q любое число может быть представлено в виде:<br>
+                <ul>
+                    <li><strong>А<sub>q</sub>&nbsp;= ± (а<sub>n-1</sub>&nbsp;• q<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;• q<sup>n-2</sup>&nbsp;+ … + а<sub>0</sub>&nbsp;• q<sup>0</sup>&nbsp;+ а<sub>-1</sub>&nbsp;• q<sup>-1</sup>&nbsp;+ … + а<sub>-m</sub>&nbsp;• q<sup>-m</sup>).&nbsp; &nbsp; &nbsp; (1)</strong>
+                    </li>
+                </ul>
+                Что означает n?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q5" id="q5_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q5_1" data-mdb-ripple-init>количество целых разрядов числа</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q5_2" data-mdb-ripple-init>Число</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q5_3" data-mdb-ripple-init>«вес» i-го разряда</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q5_4" data-mdb-ripple-init>основание системы счисления</label>
+                </div>
+            </div>
+            <input type="submit" value="Проверить ответы" id="checkAnswers" class="btn btn-primary col-md-12">
+        </div>
+    </form>
+{% else %}
+   <p>Отображение теста пока доступно только для учащихся</p>
+{% endif %}
+<script>
+    document.getElementById('quiz').addEventListener('submit', function (event) {
+        event.preventDefault(); // Предотвращаем отправку формы
+        const q1Answer = document.querySelector('input[name="q1"]:checked');
+        const q2Answer = document.querySelector('input[name="q2"]:checked');
+        const q3Answer = document.querySelector('input[name="q3"]:checked');
+        const q4Answer = document.querySelector('input[name="q4"]:checked');
+        const q5Answer = document.querySelector('input[name="q5"]:checked');
+        // Проверяем, есть ли ответы на все вопросы
+        if (!q1Answer || !q2Answer || !q3Answer || !q4Answer || !q5Answer) {
+            alert('Вы не ответили на все вопросы');
+            return; // Прекращаем выполнение функции, если не все вопросы отвечены
+        }
+
+        // Если ответы на все вопросы даны, продолжаем с проверкой результатов
+        const answers = [
+            q1Answer.value,
+            q2Answer.value,
+            q3Answer.value,
+            q4Answer.value,
+            q5Answer.value
+        ];
+
+        // Задаем правильные ответы
+        const correctAnswers = ['3', '2', '4', '2', '1'];
+
+        // Подсчитываем количество правильных ответов
+        let score = 0;
+        for (let i = 0; i < answers.length; i++) {
+            if (answers[i] === correctAnswers[i]) {
+                score++;
+            } else {
+                // Проверяем каждый ответ и устанавливаем красный цвет для неверных ответов
+                for (let i = 0; i < answers.length; i++) {
+                    const selectedAnswer = document.querySelector(`input[name="q${i + 1}"][value="${answers[i]}"]`);
+                    if (selectedAnswer) {
+                        const labelForAnswer = document.querySelector(`label[for="${selectedAnswer.id}"]`);
+                        if (labelForAnswer && (answers[i] !== correctAnswers[i])) {
+                            labelForAnswer.classList.add('w3-red');
+                        } else {
+                            labelForAnswer.classList.add('w3-green');
+                        }
+                    }
+                }
+            }
+        }
+        if (score = 5){
+        alert('Все ответы - правильные');}
+    })
+</script>
+{% endblock %}

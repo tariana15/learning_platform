@@ -1,0 +1,215 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="w3-row w3-padding-64"  style="font-size:20px">
+    <div class=" w3-container">
+      <h1 class="w3-text-teal">Двоичная система счисления</h1>
+          <p><strong>Двоичной системой счисления</strong>&nbsp;называется позиционная система счисления с основанием 2. Для записи
+          чисел в двоичной системе счисления используются только две цифры: 0 и 1.<br>
+          На основании формулы (1) для целых двоичных чисел можно записать:</p>
+      <ul>
+           <li><strong>а<sub>n-1</sub>а<sub>n-2</sub>…а<sub>1</sub>а<sub>0</sub>&nbsp;= a<sub>n-1</sub>&nbsp;•
+            2<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;• 2<sup>n-2</sup>&nbsp;+…+ а<sub>0</sub>&nbsp;• 20.
+            (1′)</strong></li>
+      </ul>
+      <p>Например:</p>
+      <ul>
+          <li><strong>10011<sub>2</sub>&nbsp;= 1 • 2<sup>4</sup>&nbsp;+ 0 • 2<sup>3</sup>&nbsp;+ 0 • 2<sup>2</sup>&nbsp;+ 1 •
+                  2<sup>1</sup>&nbsp;+ 1 • 2<sup>0</sup>&nbsp;= 2<sup>4</sup>&nbsp;+ 2<sup>1</sup>&nbsp;+ 2<sup>0</sup>&nbsp;=
+                  19<sub>10</sub>.</strong></li>
+      </ul>
+      <p>Такая форма записи «подсказывает» правило перевода натуральных двоичных чисел в десятичную систему
+          счисления:&nbsp;<strong>необходимо вычислить сумму степеней двойки, соответствующих единицам в свёрнутой форме
+              записи двоичного числа.</strong></p>
+      <p>Получим правило перевода целых десятичных чисел в двоичную систему счисления из формулы (1′).</p>
+      <p>Разделим а<sub>n-1</sub>&nbsp;• 2<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;• 2<sup>n-2</sup>&nbsp;+ … +
+          а<sub>0</sub>&nbsp;• 2<sup>0</sup>&nbsp;на 2. Частное будет равно а<sub>n-1</sub>&nbsp;• 2<sup>n-2</sup>&nbsp;+ … +
+          а<sub>1</sub>, а остаток будет равен а<sub>0</sub>.</p>
+      <p>Полученное частное опять разделим на 2, остаток от деления будет равен а<sub>1</sub>.</p>
+      <p>Если продолжить этот процесс деления, то на n-м шаге получим набор цифр:</p>
+      <ul>
+          <li><strong>а<sub>0</sub>, а<sub>1</sub>, а<sub>2</sub>, … а<sub>n-1</sub>,.</strong></li>
+      </ul>
+      <p>которые входят в двоичное представление исходного числа и совпадают с остатками при его последовательном делении на 2.</p>
+      <p>Таким образом, для перевода целого десятичного числа в двоичную систему счисления нужно последовательно выполнять
+          деление данного числа и получаемых целых частных на 2 до тех пор, пока не получим частное, равное нулю. Исходное
+          число в двоичной системе счисления составляется последовательной записью полученных остатков, начиная с последнего.
+      </p>
+    </div>
+  </div>
+
+  <div class="w3-row" style="font-size:20px">
+    <div class="w3-half w3-container">
+      <p><strong>Пример 4.</strong>&nbsp;Переведём десятичное число 11 в двоичную систему счисления. Рассмотренную выше
+    последовательность действий (алгоритм перевода) можно изобразить так:</p>
+      <p>Выписывая остатки от деления в направлении, указанном стрелкой, получим: 11<sub>10</sub>&nbsp;= 1011<sub>2</sub>.</p>
+       <p><strong>Пример 5.</strong>&nbsp;Если десятичное число достаточно большое, то более удобен следующий способ записи
+       рассмотренного выше алгоритма:</p>
+       <ul>
+            <li><strong>363<sub>10</sub>&nbsp;= 101101011<sub>2</sub></strong></li>
+       </ul>
+    </div>
+    <div class="w3-half w3-container">
+      <p class=" w3-padding-large w3-padding-64"> <img src="/static/1.jpeg" style="width:400px;height:106px;"></p>
+    </div>
+  </div>
+
+  <div class="w3-row"  style="font-size:20px">
+      <div class=" w3-container">
+          <h1 class="w3-text-teal">Восьмеричная система счисления</h1>
+          <p><strong> Восьмеричной системой счисления</strong>&nbsp;называется позиционная система счисления с основанием 8. Для
+          записи чисел в восьмеричной системе счисления используются цифры: 0, 1,2, 3, 4, 5, 6, 7.</p>
+          <p>На основании формулы (1) для целого восьмеричного числа можно записать:</p>
+          <ul> <li><strong>а<sub>n-1</sub>а<sub>n-2</sub>…а<sub>1</sub>а<sub>0</sub>&nbsp;= а<sub>n-1</sub>&nbsp;• 8<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;• 8<sup>n-2</sup>&nbsp;+ … + а<sub>0</sub>&nbsp;• 8<sup>0</sup>.&nbsp; &nbsp; (1″)</strong></li> </ul>
+          <p><strong>Например: 1063<sub>8</sub>&nbsp;= 1 • 8<sup>3</sup>&nbsp;+ 0 • 8<sup>2</sup>&nbsp;+ 6 • 8<sup>1</sup>&nbsp;+ 3 • 8<sup>0</sup>&nbsp;= 563<sub>10</sub>.</strong></p>
+          <p>Для перевода целого десятичного числа в восьмеричную систему счисления следует последовательно выполнять деление данного числа и получаемых целых частных на 8 до тех пор, пока не получим частное, равное нулю. Исходное число в новой системе счисления составляется последовательной записью полученных остатков, начиная с последнего.</p>
+      </div>
+  </div>
+
+  <div class="w3-row w3-padding-64" style="font-size:20px ">
+    <div class=" w3-container ">
+      <p><strong>Пример 6.</strong>&nbsp;Переведём десятичное число 103 в восьмеричную систему счисления.</p>
+      <p class=" w3-padding-large w3-padding-64"> <img src="/static/2.jpeg" style="width:220px;height:193px;"></p>
+    </div>
+  </div>
+
+<p class="w3-text-teal" style="font-size:30px">Тест для самоконтроля</p>
+{% if current_user.has_role('student') %}
+    <form id = "quiz" action="/course2" method="post">
+        <div style="font-size:18px">
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 1: Для записи чисел в двоичной системе счисления используются только цифры:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q1" id="q1_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q1_1" data-mdb-ripple-init>1, 2</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q1_2" data-mdb-ripple-init>0, 1, 2</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q1_3" data-mdb-ripple-init>2</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q1_4" data-mdb-ripple-init>0, 1</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 2: Двоичное число 100110 в десятичной системе счисления записывается как:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q2" id="q2_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q2_1" data-mdb-ripple-init>36</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q2_2" data-mdb-ripple-init>38</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q2_3" data-mdb-ripple-init>46</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q2_4" data-mdb-ripple-init>37</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 3: Сколько цифр 1 в двоичном представлении десятичного числа 15?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q3" id="q3_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q3_1" data-mdb-ripple-init>2</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q3_2" data-mdb-ripple-init>1</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q3_3" data-mdb-ripple-init>4</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q3_4" data-mdb-ripple-init>3</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 4: Числу 126 в восьмиричной системе счисления соответствует число … в десятичной системе счисления?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q4" id="q4_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q4_1" data-mdb-ripple-init>176</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q4_2" data-mdb-ripple-init>86</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q4_3" data-mdb-ripple-init>177</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q4_4" data-mdb-ripple-init>180</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 5: После числа 17 в ряду восьмеричных чисел идет число:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q5" id="q5_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q5_1" data-mdb-ripple-init>18</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q5_2" data-mdb-ripple-init>19</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q5_3" data-mdb-ripple-init>20</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q5_4" data-mdb-ripple-init>21</label>
+                </div>
+            </div>
+            <input type="submit" value="Проверить ответы" id="checkAnswers" class="btn btn-primary col-md-12">
+        </div>
+    </form>
+{% else %}
+   <p>Отображение теста пока доступно только для учащихся</p>
+{% endif %}
+<script>
+    document.getElementById('quiz').addEventListener('submit', function (event) {
+        event.preventDefault(); // Предотвращаем отправку формы
+        const q1Answer = document.querySelector('input[name="q1"]:checked');
+        const q2Answer = document.querySelector('input[name="q2"]:checked');
+        const q3Answer = document.querySelector('input[name="q3"]:checked');
+        const q4Answer = document.querySelector('input[name="q4"]:checked');
+        const q5Answer = document.querySelector('input[name="q5"]:checked');
+        // Проверяем, есть ли ответы на все вопросы
+        if (!q1Answer || !q2Answer || !q3Answer || !q4Answer || !q5Answer) {
+            alert('Вы не ответили на все вопросы');
+            return; // Прекращаем выполнение функции, если не все вопросы отвечены
+        }
+
+        // Если ответы на все вопросы даны, продолжаем с проверкой результатов
+        const answers = [
+            q1Answer.value,
+            q2Answer.value,
+            q3Answer.value,
+            q4Answer.value,
+            q5Answer.value
+        ];
+
+        // Задаем правильные ответы
+        const correctAnswers = ['4', '2', '3', '1', '3'];
+
+        // Подсчитываем количество правильных ответов
+        let score = 0;
+        for (let i = 0; i < answers.length; i++) {
+            if (answers[i] === correctAnswers[i]) {
+                score++;
+            } else {
+                // Проверяем каждый ответ и устанавливаем красный цвет для неверных ответов
+                for (let i = 0; i < answers.length; i++) {
+                    const selectedAnswer = document.querySelector(`input[name="q${i + 1}"][value="${answers[i]}"]`);
+                    if (selectedAnswer) {
+                        const labelForAnswer = document.querySelector(`label[for="${selectedAnswer.id}"]`);
+                        if (labelForAnswer && (answers[i] !== correctAnswers[i])) {
+                            labelForAnswer.classList.add('w3-red');
+                        } else {
+                            labelForAnswer.classList.add('w3-green');
+                        }
+                    }
+                }
+            }
+        }
+        if (score = 5){
+        alert('Все ответы - правильные');}
+    })
+</script>
+{% endblock %}

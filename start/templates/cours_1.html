@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="w3-row w3-padding-64" style="font-size:20px">
+    <div class=" w3-container" >
+      <h1 class="w3-text-teal">Принципы системы счисления</h1>
+          <p><strong> Общие сведения о системах счисления</strong> </p>
+
+    <p>В любой системе счисления цифры служат для обозначения чисел, называемых узловыми;
+    остальные числа (алгоритмические) получаются в результате каких-либо операций из узловых чисел.</p>
+
+    <p>
+        <strong>Пример 1.</strong>
+         &nbsp;У вавилонян узловыми являлись числа 1, 10, 60; в римской системе счисления узловые числа —
+        это 1, 5, 10, 50, 100, 500 и 1000, обозначаемые соответственно I, V, X, L, С, D, М.
+    </p>
+
+    <p>
+        <strong>Система счисления</strong>
+        &nbsp;— это знаковая система, в которой приняты определённые правила записи чисел. Знаки, с помощью которых записываются числа, называются&nbsp;
+        <strong>цифрами</strong>
+        , а их совокупность —&nbsp;
+        <strong>алфавитом</strong>
+        &nbsp;системы счисления.
+    </p>
+    </div>
+    <div class="w3-container">
+      <p>
+ Системы счисления различаются выбором узловых
+ чисел и способами образования алгоритмических чисел. Можно выделить следующие виды систем счисления:
+ </p>
+
+<ul>
+   <li>
+   1) унарная система;
+   </li>
+   <li>
+   2) непозиционные системы;
+   </li>
+   <li>
+   3) позиционные системы.
+   </li>
+
+</ul>
+
+    <p>Простейшая и самая древняя система — так называемая унарная система счисления. В ней для записи любых чисел используется всего один символ — палочка, узелок, зарубка, камушек. Длина записи числа при таком кодировании прямо связана с его величиной, что роднит этот способ с геометрическим представлением чисел в виде отрезков. Именно унарная система лежит в фундаменте
+        арифметики, и именно она до сих пор вводит первоклассников в мир счёта. Унарную систему ещё называют системой бирок.</p>
+
+    <p>Система счисления называется&nbsp;
+       <strong>непозиционной</strong>
+       , если количественный эквивалент (количественное значение) цифры в числе не зависит от её положения в записи числа.
+    </p>
+
+    <p>
+        <strong>Пример 2.</strong>
+        &nbsp;В древнеегипетской системе счисления числа 1, 2, 3, 4, 10, 13, 40 обозначались соответственно следующим образом:
+    </p>
+
+
+
+    <p>Те же числа в римской системе счисления обозначаются так: I, II, III, IV, X, XIII, XL. Здесь алгоритмические числа получаются путём сложения и вычитания узловых чисел с учётом следующего правила: каждый меньший знак, поставленный справа от большего, прибавляется к его значению, а каждый меньший знак, поставленный слева от большего, вычитается из него.</p>
+        <p>
+            Система счисления называется&nbsp;
+            <strong>позиционной</strong>
+            , если количественный эквивалент цифры зависит от её положения (позиции) в записи числа.
+            <strong>Основание</strong>
+            &nbsp;позиционной системы счисления равно количеству цифр, составляющих её алфавит.
+        </p>
+        <h1 class="w3-text-teal">Десятичная система</h1>
+        <p>
+            <strong>Десятичная система записи чисел</strong>
+        , которой мы привыкли пользоваться в повседневной жизни, с которой мы знакомы с детства, в которой производим все наши вычисления, — пример позиционной системы счисления. Алфавит десятичной системы составляют цифры 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Алгоритмические числа образуются в ней следующим образом: значения цифр умножаются на «веса» соответствующих разрядов, и все полученные значения складываются. Это отчётливо прослеживается в числительных русского языка, например: «три-ста пять-десят семь».
+        </p>
+        <p>Основанием позиционной системы счисления может служить любое натуральное число q &gt; 1. Алфавитом произвольной позиционной системы счисления с основанием q служат числа 0, 1, …, q—1, каждое из которых может быть записано с помощью одного уникального символа; младшей цифрой всегда является 0.</p>
+        <p>Основные достоинства любой позиционной системы счисления — простота выполнения арифметических операций и ограниченное количество символов, необходимых для записи любых чисел.</p>
+        <p>В позиционной системе счисления с основанием q любое число может быть представлено в виде:</p>
+
+    <ul>
+        <li><strong>А<sub>q</sub>&nbsp;= ± (а<sub>n-1</sub>&nbsp;• q<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;• q<sup>n-2</sup>&nbsp;+ … + а<sub>0</sub>&nbsp;• q<sup>0</sup>&nbsp;+ а<sub>-1</sub>&nbsp;• q<sup>-1</sup>&nbsp;+ … + а<sub>-m</sub>&nbsp;• q<sup>-m</sup>).&nbsp; &nbsp; &nbsp; (1)</strong>
+        </li>
+    </ul>
+    <p>Где:</p>
+    <ul> <li>А — число;</li> <li>q — основание системы счисления;</li> <li>а<sub>i</sub>&nbsp;— цифры, принадлежащие алфавиту данной системы счисления;</li> <li>n — количество целых разрядов числа;</li> <li>m — количество дробных разрядов числа;</li> <li>q<sup>i</sup>&nbsp;— «вес» i-го разряда.</li> </ul>
+    <p>Запись числа по формуле (1) называется&nbsp;<strong>развёрнутой формой</strong>&nbsp;записи<strong>Свёрнутной формой</strong>&nbsp;записи числа называется его представление в виде<sup><strong>1</strong></sup>&nbsp;± a<sub>n-1</sub>a<sub>n-2</sub>…a<sub>1</sub>a<sub>0</sub>,a<sub>-1</sub>…a<sub>-m</sub>.<sup><strong>1</strong></sup>&nbsp;Далее будут рассматриваться только положительные целые числа.</p>
+    <p><strong>Пример 3.</strong>&nbsp;Рассмотрим десятичное число 14351,1. Его свёрнутая форма записи настолько привычна, что мы не замечаем, как в уме переходим к развёрнутой записи, умножая цифры числа на «веса» разрядов и складывая полученные произведения:</p>
+    <ul> <li><strong>1 • 10<sup>4</sup>&nbsp;+ 4 • 10<sup>3</sup>&nbsp;+ 3 • 10<sup>2</sup>&nbsp;+ 5 • 10<sup>1</sup>&nbsp;+ 1 • 10<sup>0</sup>&nbsp;+ 1 • 10<sup>-1</sup>.</strong></li> </ul>
+
+    </div>
+  </div>
+
+<p class="w3-text-teal" style="font-size:30px">Тест для самоконтроля</p>
+{% if current_user.has_role('student') %}
+    <form id = "quiz" action="/course1" method="post">
+        <div style="font-size:18px">
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 1: Совокупность знаков, с помощью которых записываются числа, называется:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q1" id="q1_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q1_1" data-mdb-ripple-init>системой счисления</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q1_2" data-mdb-ripple-init>цифрами системы счисления</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q1_3" data-mdb-ripple-init>алфавитом системы счисления</label>
+
+                    <input type="radio" class="btn-check" name="q1" id="q1_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q1_4" data-mdb-ripple-init> основанием системы счисления</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 2: Какого вида систем счисления не существует?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q2" id="q2_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q2_1" data-mdb-ripple-init>непозиционные</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q2_2" data-mdb-ripple-init>символьная</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q2_3" data-mdb-ripple-init>позиционные</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q2_4" data-mdb-ripple-init>унарная</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 3: Дана развернутая форма записи десятичного числа   10<sup>4</sup> + 4 * 10<sup>3</sup> + 3 * 10<sup>2</sup> + 5 * 10<sup>1</sup> + 1 * 10<sup>0</sup> + 1 * 10<sup>-1</sup><br>
+                Выберите правильную свернутую форму записи этого числа</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q3" id="q3_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q3_1" data-mdb-ripple-init>14351,1</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q3_2" data-mdb-ripple-init>14351</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q3_3" data-mdb-ripple-init>143511</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q3_4" data-mdb-ripple-init>14352</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 4: Какие цифры составляют алфавит десятичной системы?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q4" id="q4_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q4_1" data-mdb-ripple-init>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q4_2" data-mdb-ripple-init>0, 1, 2, 3, 4, 5, 6, 7, 8</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q4_3" data-mdb-ripple-init>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q4_4" data-mdb-ripple-init>1, 2, 3, 4, 5, 6, 7, 8, 9</label>
+                </div>
+            </div>
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 5: В позиционной системе счисления с основанием q любое число может быть представлено в виде:<br>
+                <ul>
+                    <li><strong>А<sub>q</sub>&nbsp;= ± (а<sub>n-1</sub>&nbsp;• q<sup>n-1</sup>&nbsp;+ а<sub>n-2</sub>&nbsp;• q<sup>n-2</sup>&nbsp;+ … + а<sub>0</sub>&nbsp;• q<sup>0</sup>&nbsp;+ а<sub>-1</sub>&nbsp;• q<sup>-1</sup>&nbsp;+ … + а<sub>-m</sub>&nbsp;• q<sup>-m</sup>).&nbsp; &nbsp; &nbsp; (1)</strong>
+                    </li>
+                </ul>
+                Что означает q?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q5" id="q5_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q5_1" data-mdb-ripple-init>Число</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q5_2" data-mdb-ripple-init>количество целых разрядов числа</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q5_3" data-mdb-ripple-init>«вес» i-го разряда</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q5_4" data-mdb-ripple-init>основание системы счисления</label>
+                </div>
+            </div>
+            <input type="submit" value="Проверить ответы" id="checkAnswers" class="btn btn-primary col-md-12">
+        </div>
+    </form>
+  {% else %}
+   <p>Отображение теста пока доступно только для учащихся</p>
+{% endif %}
+<script>
+    document.getElementById('quiz').addEventListener('submit', function (event) {
+        event.preventDefault(); // Предотвращаем отправку формы
+        const q1Answer = document.querySelector('input[name="q1"]:checked');
+        const q2Answer = document.querySelector('input[name="q2"]:checked');
+        const q3Answer = document.querySelector('input[name="q3"]:checked');
+        const q4Answer = document.querySelector('input[name="q4"]:checked');
+        const q5Answer = document.querySelector('input[name="q5"]:checked');
+        // Проверяем, есть ли ответы на все вопросы
+        if (!q1Answer || !q2Answer || !q3Answer || !q4Answer || !q5Answer) {
+            alert('Вы не ответили на все вопросы');
+            return; // Прекращаем выполнение функции, если не все вопросы отвечены
+        }
+
+        // Если ответы на все вопросы даны, продолжаем с проверкой результатов
+        const answers = [
+            q1Answer.value,
+            q2Answer.value,
+            q3Answer.value,
+            q4Answer.value,
+            q5Answer.value
+        ];
+
+        // Задаем правильные ответы
+        const correctAnswers = ['3', '2', '1', '1', '3'];
+
+        // Подсчитываем количество правильных ответов
+        let score = 0;
+        for (let i = 0; i < answers.length; i++) {
+            if (answers[i] === correctAnswers[i]) {
+                score++;
+            } else {
+                // Проверяем каждый ответ и устанавливаем красный цвет для неверных ответов
+                for (let i = 0; i < answers.length; i++) {
+                    const selectedAnswer = document.querySelector(`input[name="q${i + 1}"][value="${answers[i]}"]`);
+                    if (selectedAnswer) {
+                        const labelForAnswer = document.querySelector(`label[for="${selectedAnswer.id}"]`);
+                        if (labelForAnswer && (answers[i] !== correctAnswers[i])) {
+                            labelForAnswer.classList.add('w3-red');
+                        } else {
+                            labelForAnswer.classList.add('w3-green');
+                        }
+                    }
+                }
+            }
+        }
+        if (score = 5){
+        alert('Все ответы - правильные');}
+    })
+</script>
+{% endblock %}
