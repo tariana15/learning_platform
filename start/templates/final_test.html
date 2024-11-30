@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<p class="w3-text-teal" style="font-size:30px">Итоговый тест</p>
+{% if current_user.has_role('student') and results_available %}
+    <form id="finalQuiz" action="/final_test" method="post">
+        <div style="font-size:18px">
+            <div class="quiztion">
+                <p class="w3-teal">Вопрос 1: ...</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q1" id="q1_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q1_1" data-mdb-ripple-init>Ответ 1</label>
+                    <input type="radio" class="btn-check" name="q1" id="q1_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q1_2" data-mdb-ripple-init>Ответ 2</label>
+                    <input type="radio" class="btn-check" name="q1" id="q1_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q1_3" data-mdb-ripple-init>Ответ 3</label>
+                    <input type="radio" class="btn-check" name="q1" id="q1_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q1_4" data-mdb-ripple-init>Ответ 4</label>
+                </div>
+            </div>
+            <!-- Добавьте остальные вопросы аналогично -->
+            <input type="submit" value="Завершить тест" id="submitFinalTest" class="btn btn-primary col-md-12">
+        </div>
+    </form>
+{% else %}
+    <p>Итоговый тест недоступен. Пройдите все три курса.</p>
+{% endif %}
+<script>
+    document.getElementById('finalQuiz').addEventListener('submit', function (event) {
+        event.preventDefault(); // Предотвращаем отправку формы
+        const answers = [];
+        for (let i = 1; i <= 5; i++) { // Предполагаем, что 5 вопросов
+            const answer = document.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(answer ? answer.value : '0'); // 0 если не выбран ответ
+        }
+        // Отправка данных на сервер
+        fetch('/final_test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ answers: answers.join('') }),
+        }).then(response => {
+            if (response.ok) {
+                alert('Результаты успешно сохранены!');
+                window.location.href = '/'; // Перенаправление на главную страницу
+            } else {
+                alert('Ошибка при сохранении результатов.');
+            }
+        });
+    });
+</script>
+{% endblock %} 

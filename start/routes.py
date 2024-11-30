@@ -1,8 +1,8 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_login import login_user, login_required, current_user, logout_user
 
 from start import app
-from start.models import db, User, login_manager, Role
+from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -13,9 +13,18 @@ def courses():
     return render_template("courses.html", user=current_user)
 
 
-@app.route("/cours_1")
+@app.route("/cours_1", methods=['GET', 'POST'])
 # @login_required
 def cours_1():
+    if request.method == 'POST':
+        data = request.get_json()
+        answers = data['answers']
+        user_id = current_user.id
+        test_number = 1
+        # Сохранение результатов в БД
+        save_results(user_id, test_number, answers)
+        return jsonify(success=True)
+    
     return render_template("cours_1.html")
 
 
@@ -94,3 +103,19 @@ def layout():
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.query(User).get(user_id)
+
+@app.route('/final_test', methods=['GET', 'POST'])
+def final_test():
+    if request.method == 'POST':
+        data = request.get_json()
+        answers = data['answers']
+        user_id = current_user.id
+        test_number = 4
+        # Сохранение результатов в БД
+        save_results(user_id, test_number, answers)
+        return jsonify(success=True)
+    
+    # Проверка доступности теста
+    results_available = check_previous_results(current_user.id)
+    print(current_user.roles[0].name)
+    return render_template('final_test.html', results_available=results_available)

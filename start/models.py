@@ -12,6 +12,11 @@ roles_users = db.Table(
     db.Column('user_id', db.Integer(), db.ForeignKey('users.id')),
     db.Column('role_id', db.Integer(), db.ForeignKey('roles.id'))
 )
+teachers_students = db.Table(
+    'teachers_students',
+    db.Column('teacher_id', db.Integer(), db.ForeignKey('users.id'), primary_key=True),
+    db.Column('student_id', db.Integer(), db.ForeignKey('users.id'), primary_key=True)
+)
 
 
 class Role(db.Model, RoleMixin):
@@ -67,3 +72,25 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class Result(db.Model):
+    __tablename__ = 'results'
+    student_id = db.Column(db.Integer, nullable=False)
+    student_result = db.Column(db.String, nullable=False)  # Строка из 0 и 1
+    test_number = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    
+
+
+def save_results(user_id, test_number, answers):
+    """Сохраняет результаты теста в базе данных."""
+    new_result = Result(student_id=user_id, test_number=test_number, student_result=answers)
+    db.session.add(new_result)
+    db.session.commit()
+
+
+def check_previous_results(user_id):
+    """Проверяет, прошел ли пользователь предыдущие тесты."""
+    results = Result.query.filter(Result.student_id == user_id, Result.test_number < 4).all()
+    return len(results) == 3  # Проверяем, что есть результаты для трех тестов
