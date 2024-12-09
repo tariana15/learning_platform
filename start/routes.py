@@ -154,10 +154,10 @@ def teacher():
     }
 
     # Получение student_id для учеников, привязанных к этому учителю
-    student_ids = db.session.query(TeacherStudent).filter_by(teacher_id=current_user.id).all()
+    student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
     student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
 
     # Получение результатов тестов учеников
-    students_results = Result.query.filter(Result.student_id.in_(student_ids)).all()
+    students_results = Result.query.filter(Result.student_id.in_(student_ids),Result.test_number==4).all()
 
     return render_template('teacher.html', user_info=user_info, students_results=students_results)
