@@ -1,52 +1,230 @@
 {% extends "layout.html" %}
 {% block content %}
-<p class="w3-text-teal" style="font-size:30px">Итоговый тест</p>
-{% if current_user.has_role('student') and results_available %}
+<div class="container">
+    <h1 class="text-center">Итоговый тест</h1>
+    <p>Пройдите итоговый тест по теме "Системы счисления" и проверьте свои знания.</p>
+    {% if current_user.has_role('student') %}
     <form id="finalQuiz" action="/final_test" method="post">
         <div style="font-size:18px">
             <div class="quiztion">
-                <p class="w3-teal">Вопрос 1: ...</p>
+                <p class="w3-teal">1. Двоичному числу 100111011000.110101 соответствуют по величине восьмеричное число:
+                </p>
                 <div class="btn-group col-md-12">
                     <input type="radio" class="btn-check" name="q1" id="q1_1" autocomplete="off" value="1" />
-                    <label class="btn" for="q1_1" data-mdb-ripple-init>Ответ 1</label>
+                    <label class="btn" for="q1_1" data-mdb-ripple-init>1290.75</label>
+
                     <input type="radio" class="btn-check" name="q1" id="q1_2" autocomplete="off" value="2" />
-                    <label class="btn" for="q1_2" data-mdb-ripple-init>Ответ 2</label>
+                    <label class="btn" for="q1_2" data-mdb-ripple-init>4730.65</label>
+
                     <input type="radio" class="btn-check" name="q1" id="q1_3" autocomplete="off" value="3" />
-                    <label class="btn" for="q1_3" data-mdb-ripple-init>Ответ 3</label>
-                    <input type="radio" class="btn-check" name="q1" id="q1_4" autocomplete="off" value="4" />
-                    <label class="btn" for="q1_4" data-mdb-ripple-init>Ответ 4</label>
+                    <label class="btn" for="q1_3" data-mdb-ripple-init>6350.25</label>
                 </div>
             </div>
-            <!-- Добавьте остальные вопросы аналогично -->
+
+            <div class="quiztion">
+                <p class="w3-teal">2. Значение выражения 11100.01(2) + 5A.8(16) + 42.4(8) равно десятичному числу:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q2" id="q2_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q2_1" data-mdb-ripple-init>100.00</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q2_2" data-mdb-ripple-init>120.25</label>
+
+                    <input type="radio" class="btn-check" name="q2" id="q2_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q2_3" data-mdb-ripple-init>150.75</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">3. Самой древней системой счисления является:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q3" id="q3_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q3_1" data-mdb-ripple-init>единичная</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q3_2" data-mdb-ripple-init>двоичная</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q3_3" data-mdb-ripple-init>римская</label>
+
+                    <input type="radio" class="btn-check" name="q3" id="q3_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q3_4" data-mdb-ripple-init>древнеегипетская</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">4. Десятичному числу 1,25 соответствует двоичное число:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q4" id="q4_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q4_1" data-mdb-ripple-init>1.001</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q4_2" data-mdb-ripple-init>1.1</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q4_3" data-mdb-ripple-init>1.01</label>
+
+                    <input type="radio" class="btn-check" name="q4" id="q4_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q4_4" data-mdb-ripple-init>1.02</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">5. В какой системе счисления ЭВМ выполняет арифметические расчёты?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q5" id="q5_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q5_1" data-mdb-ripple-init>единичной</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q5_2" data-mdb-ripple-init>двоичной</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q5_3" data-mdb-ripple-init>десятичной</label>
+
+                    <input type="radio" class="btn-check" name="q5" id="q5_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q5_4" data-mdb-ripple-init>шестнадцатеричной</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">6. При сложении двоичных чисел 10 и 100 получаем двоичную сумму:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q6" id="q6_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q6_1" data-mdb-ripple-init>101</label>
+
+                    <input type="radio" class="btn-check" name="q6" id="q6_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q6_2" data-mdb-ripple-init>110</label>
+
+                    <input type="radio" class="btn-check" name="q6" id="q6_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q6_3" data-mdb-ripple-init>111</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">7. Двоичному числу 11001 соответствует десятичное число:</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q7" id="q7_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q7_1" data-mdb-ripple-init>5</label>
+
+                    <input type="radio" class="btn-check" name="q7" id="q7_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q7_2" data-mdb-ripple-init>25</label>
+
+                    <input type="radio" class="btn-check" name="q7" id="q7_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q7_3" data-mdb-ripple-init>55</label>
+
+                    <input type="radio" class="btn-check" name="q7" id="q7_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q7_4" data-mdb-ripple-init>101</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">8. Двоичному числу 1001001.11011 соответствует по величине шестнадцатеричное число:
+                </p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q8" id="q8_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q8_1" data-mdb-ripple-init>49.D8</label>
+
+                    <input type="radio" class="btn-check" name="q8" id="q8_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q8_2" data-mdb-ripple-init>59.C1</label>
+
+                    <input type="radio" class="btn-check" name="q8" id="q8_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q8_3" data-mdb-ripple-init>69.E4</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">9. Что такое система счисления?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q9" id="q9_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q9_1" data-mdb-ripple-init>Правила выполнения операций над числами</label>
+
+                    <input type="radio" class="btn-check" name="q9" id="q9_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q9_2" data-mdb-ripple-init>Правила записи чисел</label>
+
+                    <input type="radio" class="btn-check" name="q9" id="q9_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q9_3" data-mdb-ripple-init>Это способ записи (представления) чисел.</label>
+
+                    <input type="radio" class="btn-check" name="q9" id="q9_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q9_4" data-mdb-ripple-init>Правильный ответ 1 и 2 и 3</label>
+
+                    <input type="radio" class="btn-check" name="q9" id="q9_5" autocomplete="off" value="5" />
+                    <label class="btn" for="q9_5" data-mdb-ripple-init>Нет верного ответа</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">10. Какое число в десятичной системе соответствует шестнадцатеричному числу A?</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q10" id="q10_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q10_1" data-mdb-ripple-init>10</label>
+
+                    <input type="radio" class="btn-check" name="q10" id="q10_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q10_2" data-mdb-ripple-init>11</label>
+
+                    <input type="radio" class="btn-check" name="q10" id="q10_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q10_3" data-mdb-ripple-init>12</label>
+                </div>
+            </div>
+
+            <div class="quiztion">
+                <p class="w3-teal">11. Произведите перевод из шестнадцатеричной системы счисления в двоичную число:
+                    2ВС16</p>
+                <div class="btn-group col-md-12">
+                    <input type="radio" class="btn-check" name="q11" id="q11_1" autocomplete="off" value="1" />
+                    <label class="btn" for="q11_1" data-mdb-ripple-init>1100101100102</label>
+
+                    <input type="radio" class="btn-check" name="q11" id="q11_2" autocomplete="off" value="2" />
+                    <label class="btn" for="q11_2" data-mdb-ripple-init>10101111002</label>
+
+                    <input type="radio" class="btn-check" name="q11" id="q11_3" autocomplete="off" value="3" />
+                    <label class="btn" for="q11_3" data-mdb-ripple-init>1011110000102</label>
+
+                    <input type="radio" class="btn-check" name="q11" id="q11_4" autocomplete="off" value="4" />
+                    <label class="btn" for="q11_4" data-mdb-ripple-init>001011100012</label>
+                </div>
+            </div>
+
             <input type="submit" value="Завершить тест" id="submitFinalTest" class="btn btn-primary col-md-12">
         </div>
     </form>
-{% else %}
+    {% else %}
     <p>Итоговый тест недоступен. Пройдите все три курса.</p>
-{% endif %}
-<script>
-    document.getElementById('finalQuiz').addEventListener('submit', function (event) {
-        event.preventDefault(); // Предотвращаем отправку формы
-        const answers = [];
-        for (let i = 1; i <= 11; i++) { // Предполагаем, что 5 вопросов
-            const answer = document.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(answer ? answer.value : '0'); // 0 если не выбран ответ
-        }
-        // Отправка данных на сервер
-        fetch('/final_test', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ answers: answers.join('') }),
-        }).then(response => {
-            if (response.ok) {
-                alert('Результаты успешно сохранены!');
-                window.location.href = '/'; // Перенаправление на главную страницу
-            } else {
-                alert('Ошибка при сохранении результатов.');
+    {% endif %}
+    <script>
+        document.getElementById('finalQuiz').addEventListener('submit', function (event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const answers = [
+                "1", // 1. Двоичному числу 100111011000.110101 соответствуют по величине восьмеричное число: 1290.75
+                "3", // 2. Значение выражения 11100.01(2) + 5A.8(16) + 42.4(8) равно десятичному числу: 150.75
+                "1", // 3. Самой древней системой счисления является: единичная
+                "3", // 4. Десятичному числу 1,25 соответствует двоичное число: 1.01
+                "2", // 5. В какой системе счисления ЭВМ выполняет арифметические расчёты? двоичной
+                "2", // 6. При сложении двоичных чисел 10 и 100 получаем двоичную сумму: 110
+                "2", // 7. Двоичному числу 11001 соответствует десятичное число: 25
+                "1", // 8. Двоичному числу 1001001.11011 соответствует по величине шестнадцатеричное число: 49.D8
+                "4", // 9. Что такое система счисления? Правильный ответ 1 и 2 и 3
+                "1", // 10. Какое число в десятичной системе соответствует шестнадцатеричному числу A? 10
+                "2"  // 11. Произведите перевод из шестнадцатеричной системы счисления в двоичную число: 2ВС16 - 10101111002
+            ];
+            for (let i = 1; i <= 11; i++) { // Предполагаем, что 11 вопросов
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                answers.push(answer ? answer.value : '0'); // 0 если не выбран ответ
             }
+            // Отправка данных на сервер
+            fetch('/final_test', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ answers: answers.join('') }),
+            }).then(response => {
+                if (response.ok) {
+                    alert('Результаты успешно сохранены!');
+                    // window.location.href = '/'; // Перенаправление на главную страницу
+                } else {
+                    alert('Ошибка при сохранении результатов.');
+                }
+            });
         });
-    });
-</script>
-{% endblock %} 
+    </script>
+    {% endblock %}

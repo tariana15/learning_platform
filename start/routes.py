@@ -81,14 +81,14 @@ def login():
 @app.route('/registration', methods=['GET', 'POST'] )
 def registration():
     name = request.form.get('name')
-    role = request.form.getlist('role')
+    # role = request.form.getlist('role')
     email = request.form.get('e-mail')
     username = request.form.get('username')
     password = request.form.get('password')
     password2 = request.form.get('password2')
 
     if request.method == 'POST':
-        if not (name or role or email or username or password or password2):
+        if not (name or email or username or password or password2):
             flash ('Пожалуйста заполните все поля')
         elif password != password2:
             flash('Пароли не совпадают')
@@ -96,8 +96,8 @@ def registration():
             hash_pwd = generate_password_hash(password)
             new_user = User(name=name,email=email,username=username,password=hash_pwd, active=1)
             # store the role
-            role = Role.query.filter_by(id=request.form['role']).first()
-            new_user.roles.append(role)
+            # role = Role.query.filter_by(id=request.form['role']).first()
+            # new_user.roles.append(role)
 
             db.session.add(new_user)
             db.session.commit()
