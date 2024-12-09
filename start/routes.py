@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for,
 from flask_login import login_user, login_required, current_user, logout_user
 
 from start import app
-from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results
+from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results, TeacherStudent
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -67,9 +67,7 @@ def login():
 
         if user and check_password_hash(user.password, password):
             login_user(user)
-
-            next_page = request.args.get('next')
-
+            # request.args.get('next')
             return redirect('courses')
         else:
             flash('Имя пользователя или Пароль не корректен')
@@ -136,3 +134,25 @@ def final_test():
     results_available = check_previous_results(current_user.id)
     print(current_user.roles[0].name)
     return render_template('final_test.html', results_available=results_available)
+
+@app.route('/teacher')
+@login_required
+def teacher():
+    if current_user.has_role('student'): # Проверка, что роль - ученик
+        flash('У вас нет доступа к этой странице.')
+        return redirect('/')  # Перенаправление на главную страницу
+
+    # Получение информации о текущем пользователе
+    user_info = {
+        'name': current_user.username,
+        'email': current_user.email
+    }
+
+    # Получение student_id для учеников, привязанных к этому учителю
+    student_ids = db.session.query(TeacherStudent).filter_by(teacher_id=current_user.id).all()
+    student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
+
+    # Получение результатов тестов учеников
+    students_results = Result.query.filter(Result.student_id.in_(student_ids)).all()
+
+    return render_template('teacher.html', user_info=user_info, students_results=students_results)

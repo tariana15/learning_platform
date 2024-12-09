@@ -29,7 +29,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    {% if current_user.has_role('teacher') %}
+    <a href="{{ url_for('teacher') }}" class="w3-bar-item w3-button w3-theme-l1">{{current_user.username}}</a>
+    {% else %}
     <a href="#" class="w3-bar-item w3-button w3-theme-l1">{{current_user.username}}</a>
+    {% endif %}
     <a href="{{ url_for('courses') }}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Курсы</a>
     <a href="{{ url_for('logout') }}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Выход</a>
   </div>
@@ -44,6 +48,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
         <a id="top_1" href="{{ url_for('cours_1') }}" class="w3-bar-item w3-button w3-hover-black">Тема 1</a>
         <a id="top_2" href="{{ url_for('cours_2') }}" class="w3-bar-item w3-button w3-hover-black">Тема 2</a>
         <a id="top_3" href="{{ url_for('cours_3') }}" class="w3-bar-item w3-button w3-hover-black">Тема 3</a>
+        <a id="top_3" href="{{ url_for('final_test') }}" class="w3-bar-item w3-button w3-hover-black">Итоговый тест</a>
   </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -62,7 +67,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 
 <script>
   var mySidebar = document.getElementById("mySidebar");
-    Close the sidebar with the close button
+    // Close the sidebar with the close button
     function w3_close() {
       mySidebar.style.display = "none";
       overlayBg.style.display = "none";
@@ -70,7 +75,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   // Get the DIV with overlay effect
 var overlayBg = document.getElementById("myOverlay");
 
-    Toggle between showing and hiding the sidebar, and add overlay effect
+    // Toggle between showing and hiding the sidebar, and add overlay effect
     function w3_open() {
       if (mySidebar.style.display === 'block') {
         mySidebar.style.display = 'none';

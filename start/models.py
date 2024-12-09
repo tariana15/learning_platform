@@ -12,12 +12,19 @@ roles_users = db.Table(
     db.Column('user_id', db.Integer(), db.ForeignKey('users.id')),
     db.Column('role_id', db.Integer(), db.ForeignKey('roles.id'))
 )
-teachers_students = db.Table(
-    'teachers_students',
-    db.Column('teacher_id', db.Integer(), db.ForeignKey('users.id'), primary_key=True),
-    db.Column('student_id', db.Integer(), db.ForeignKey('users.id'), primary_key=True)
-)
 
+class TeacherStudent(db.Model):
+    __tablename__ = 'teachers_students'  # Имя таблицы в базе данных
+
+    teacher_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True, nullable=False)  # Внешний ключ на таблицу пользователей (учителей)
+    student_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True, nullable=False)  # Внешний ключ на таблицу пользователей (учеников)
+
+    # Определение отношений
+    teacher = db.relationship('User', foreign_keys=[teacher_id], backref='teacher_students')
+    student = db.relationship('User', foreign_keys=[student_id], backref='student_teachers')
+
+    def __repr__(self):
+        return f'<TeacherStudent {self.teacher_id} - {self.student_id}>'
 
 class Role(db.Model, RoleMixin):
     __tablename__ = 'roles'
