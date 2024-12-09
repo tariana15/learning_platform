@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if results_available %}
+<div class="w3-row w3-padding-64" style="font-size:20px">
+    <div class=" w3-container" >
+      <h1 class="w3-text-teal">Тема пройдена, перейдите к итоговому тесту.</h1>
+    </div>
+</div>
+{% else %}
 <div class="w3-row w3-padding-64" style="font-size:20px">
     <h1 class="w3-text-teal">Правило перевода целых десятичных чисел в систему счисления с основанием q</h1>
     <div class="w3-third w3-container">
@@ -183,4 +190,5 @@
     });
 });
 </script>
+{% endif %}
 {% endblock %}

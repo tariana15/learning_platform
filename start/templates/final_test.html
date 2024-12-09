@@ -3,7 +3,7 @@
 <div class="container">
     <h1 class="text-center">Итоговый тест</h1>
     <p>Пройдите итоговый тест по теме "Системы счисления" и проверьте свои знания.</p>
-    {% if current_user.has_role('student') %}
+    {% if current_user.has_role('student') and results_available and final_finished %}
     <form id="finalQuiz" action="/final_test" method="post">
         <div style="font-size:18px">
             <div class="quiztion">

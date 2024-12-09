@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if results_available %}
+<div class="w3-row w3-padding-64" style="font-size:20px">
+    <div class=" w3-container" >
+      <h1 class="w3-text-teal">Тема пройдена, перейдите к итоговому тесту.</h1>
+    </div>
+</div>
+{% else %}
 <div class="w3-row w3-padding-64"  style="font-size:20px">
     <div class=" w3-container">
       <h1 class="w3-text-teal">Двоичная система счисления</h1>
@@ -194,4 +201,5 @@
         });
     });
 </script>
+{% endif %}
 {% endblock %}

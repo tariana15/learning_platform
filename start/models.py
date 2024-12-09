@@ -99,5 +99,20 @@ def save_results(user_id, test_number, answers):
 
 def check_previous_results(user_id):
     """Проверяет, прошел ли пользователь предыдущие тесты."""
-    results = Result.query.filter(Result.student_id == user_id, Result.test_number < 4).all()
-    return len(results) == 3  # Проверяем, что есть результаты для трех тестов
+    final_ready = 0
+    results1 = Result.query.filter(Result.student_id == user_id, Result.test_number == 1).all()
+    if len(results1) > 0:
+        final_ready += 1
+    results2 = Result.query.filter(Result.student_id == user_id, Result.test_number == 2).all()
+    if len(results2) > 0:
+        final_ready += 1
+    results3 = Result.query.filter(Result.student_id == user_id, Result.test_number == 3).all()
+    if len(results3) > 0:
+        final_ready += 1
+    return final_ready == 3  # Проверяем, что есть результаты для трех тестов
+
+
+def final_result_available(user_id):
+    """Проверяет, прошел ли пользователь предыдущие тесты."""
+    results = Result.query.filter(Result.student_id == user_id, Result.test_number == 4).all()
+    return len(results) != 1  # Проверяем, что есть результаты для итогового теста

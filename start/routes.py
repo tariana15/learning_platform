@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for,
 from flask_login import login_user, login_required, current_user, logout_user
 
 from start import app
-from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results, TeacherStudent
+from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results, TeacherStudent, final_result_available
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -25,7 +25,8 @@ def cours_1():
         save_results(user_id, test_number, answers)
         return jsonify(success=True)
     
-    return render_template("cours_1.html")
+    results_available = check_previous_results(current_user.id)
+    return render_template("cours_1.html", results_available=results_available)
 
 
 @app.route("/cours_2", methods=['GET', 'POST'])
@@ -40,7 +41,8 @@ def cours_2():
         save_results(user_id, test_number, answers)
         return jsonify(success=True)
     
-    return render_template("cours_2.html")
+    results_available = check_previous_results(current_user.id)
+    return render_template("cours_2.html", results_available=results_available)
 
 
 @app.route("/cours_3", methods=['GET', 'POST'])
@@ -54,7 +56,9 @@ def cours_3():
         # Сохранение результатов в БД
         save_results(user_id, test_number, answers)
         return jsonify(success=True)
-    return render_template("cours_3.html")
+    
+    results_available = check_previous_results(current_user.id)
+    return render_template("cours_3.html", results_available=results_available)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -132,8 +136,9 @@ def final_test():
     
     # Проверка доступности теста
     results_available = check_previous_results(current_user.id)
-    print(current_user.roles[0].name)
-    return render_template('final_test.html', results_available=results_available)
+    final_finished = final_result_available(current_user.id)
+    # print(current_user.roles[0].name)
+    return render_template('final_test.html', results_available=results_available, final_finished=final_finished)
 
 @app.route('/teacher')
 @login_required

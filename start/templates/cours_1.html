@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if results_available %}
+<div class="w3-row w3-padding-64" style="font-size:20px">
+    <div class=" w3-container" >
+      <h1 class="w3-text-teal">Тема пройдена, перейдите к итоговому тесту.</h1>
+    </div>
+</div>
+{% else %}
 <div class="w3-row w3-padding-64" style="font-size:20px">
     <div class=" w3-container" >
       <h1 class="w3-text-teal">Принципы системы счисления</h1>
@@ -86,7 +93,6 @@
 
     </div>
   </div>
-
 <p class="w3-text-teal" style="font-size:30px">Тест для самоконтроля</p>
 {% if current_user.has_role('student') %}
     <form id = "quiz" action="/course1" method="post">
@@ -215,4 +221,5 @@
         });
     });
 </script>
+{% endif %}
 {% endblock %}
