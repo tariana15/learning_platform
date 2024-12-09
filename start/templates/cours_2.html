@@ -165,51 +165,33 @@
 <script>
     document.getElementById('quiz').addEventListener('submit', function (event) {
         event.preventDefault(); // Предотвращаем отправку формы
-        const q1Answer = document.querySelector('input[name="q1"]:checked');
-        const q2Answer = document.querySelector('input[name="q2"]:checked');
-        const q3Answer = document.querySelector('input[name="q3"]:checked');
-        const q4Answer = document.querySelector('input[name="q4"]:checked');
-        const q5Answer = document.querySelector('input[name="q5"]:checked');
-        // Проверяем, есть ли ответы на все вопросы
-        if (!q1Answer || !q2Answer || !q3Answer || !q4Answer || !q5Answer) {
-            alert('Вы не ответили на все вопросы');
-            return; // Прекращаем выполнение функции, если не все вопросы отвечены
-        }
-
-        // Если ответы на все вопросы даны, продолжаем с проверкой результатов
-        const answers = [
-            q1Answer.value,
-            q2Answer.value,
-            q3Answer.value,
-            q4Answer.value,
-            q5Answer.value
-        ];
-
-        // Задаем правильные ответы
         const correctAnswers = ['4', '2', '3', '1', '3'];
-
-        // Подсчитываем количество правильных ответов
-        let score = 0;
-        for (let i = 0; i < answers.length; i++) {
-            if (answers[i] === correctAnswers[i]) {
-                score++;
+        const answers = [];
+        for (let i = 1; i <= 5; i++) { // Предполагаем, что 5 вопросов
+            const answer = document.querySelector(`input[name="q${i}"]:checked`);
+            if (answer) {
+                // Сравниваем ответ с правильным и добавляем 1 или 0 в массив answers
+                answers.push(answer.value === correctAnswers[i - 1] ? '1' : '0');
             } else {
-                // Проверяем каждый ответ и устанавливаем красный цвет для неверных ответов
-                for (let i = 0; i < answers.length; i++) {
-                    const selectedAnswer = document.querySelector(`input[name="q${i + 1}"][value="${answers[i]}"]`);
-                    if (selectedAnswer) {
-                        const labelForAnswer = document.querySelector(`label[for="${selectedAnswer.id}"]`);
-                        if (labelForAnswer && (answers[i] !== correctAnswers[i])) {
-                            labelForAnswer.classList.add('w3-red');
-                        } else {
-                            labelForAnswer.classList.add('w3-green');
-                        }
-                    }
-                }
+                answers.push('0'); // Если ответ не выбран, добавляем 0
             }
         }
-        if (score = 5){
-        alert('Все ответы - правильные');}
-    })
+
+        // Отправка данных на сервер
+        fetch('/cours_2', { // Замените на соответствующий маршрут для каждого курса
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ answers: answers.join('') }),
+        }).then(response => {
+            if (response.ok) {
+                alert('Результаты успешно сохранены!');
+                // window.location.href = '/'; // Перенаправление на главную страницу
+            } else {
+                alert('Ошибка при сохранении результатов.');
+            }
+        });
+    });
 </script>
 {% endblock %}

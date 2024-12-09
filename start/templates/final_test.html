@@ -28,7 +28,7 @@
     document.getElementById('finalQuiz').addEventListener('submit', function (event) {
         event.preventDefault(); // Предотвращаем отправку формы
         const answers = [];
-        for (let i = 1; i <= 5; i++) { // Предполагаем, что 5 вопросов
+        for (let i = 1; i <= 11; i++) { // Предполагаем, что 5 вопросов
             const answer = document.querySelector(`input[name="q${i}"]:checked`);
             answers.push(answer ? answer.value : '0'); // 0 если не выбран ответ
         }

@@ -28,15 +28,32 @@ def cours_1():
     return render_template("cours_1.html")
 
 
-@app.route("/cours_2")
+@app.route("/cours_2", methods=['GET', 'POST'])
 @login_required
 def cours_2():
+    if request.method == 'POST':
+        data = request.get_json()
+        answers = data['answers']
+        user_id = current_user.id
+        test_number = 2
+        # Сохранение результатов в БД
+        save_results(user_id, test_number, answers)
+        return jsonify(success=True)
+    
     return render_template("cours_2.html")
 
 
-@app.route("/cours_3")
+@app.route("/cours_3", methods=['GET', 'POST'])
 @login_required
 def cours_3():
+    if request.method == 'POST':
+        data = request.get_json()
+        answers = data['answers']
+        user_id = current_user.id
+        test_number = 3
+        # Сохранение результатов в БД
+        save_results(user_id, test_number, answers)
+        return jsonify(success=True)
     return render_template("cours_3.html")
 
 
