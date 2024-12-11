@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-    <h1 class="text-center">Итоговый тест по теме "Системы счисления"</h1>
+    <div class="w3-row w3-padding-64" style="font-size:20px">
+        <div class=" w3-container" >
+          <h1 class="w3-text-teal">Итоговый тест по теме "Системы счисления"</h1>
+        </div>
+    </div>
     {% if current_user.has_role('student') and results_available and final_finished %}
     <form id="finalQuiz" action="/final_test" method="post">
         <div style="font-size:18px">
@@ -187,7 +191,12 @@
         </div>
     </form>
     {% else %}
-    <p>Итоговый тест недоступен.</p>
+    <div class="w3-row" style="font: size 5px; margin-top: -30px; display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="w3-container">
+            <h1 class="w3-text-teal">Итоговый тест недоступен</h1>
+        </div>
+    </div>
+    
     {% endif %}
     <script>
         document.getElementById('finalQuiz').addEventListener('submit', function (event) {
@@ -223,7 +232,7 @@
             }).then(response => {
                 if (response.ok) {
                     alert('Результаты успешно сохранены!');
-                    // window.location.href = '/'; // Перенаправление на главную страницу
+                     window.location.href = 'courses'; // Перенаправление на главную страницу
                 } else {
                     alert('Ошибка при сохранении результатов.');
                 }
