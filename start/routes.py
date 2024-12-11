@@ -4,18 +4,17 @@ from flask_login import login_user, login_required, current_user, logout_user
 from start import app
 from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results, TeacherStudent, final_result_available
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_admin import expose, AdminIndexView
+from flask_admin import expose, AdminIndexView, BaseView
 
 
-#main_bp = Blueprint('main_blueprint', __name__)
 @app.route("/courses")
-# @login_required
+@login_required
 def courses():
     return render_template("courses.html", user=current_user)
 
 
 @app.route("/cours_1", methods=['GET', 'POST'])
-# @login_required
+@login_required
 def cours_1():
     if request.method == 'POST':
         data = request.get_json()
@@ -70,7 +69,7 @@ def login():
     if username and password:
         user = User.query.filter_by(username=username).first()
 
-        if user and check_password_hash(user.password, password):
+        if user and user.check_password(password):
             login_user(user)
             # request.args.get('next')
             # Проверяем, является ли пользователь админом
@@ -79,8 +78,7 @@ def login():
             else:
                 return redirect(url_for('courses'))  # Перенаправление обычных пользователей
             
-        else:
-            flash('Имя пользователя или Пароль не корректен')
+        flash('Имя пользователя или Пароль не корректен')
     else:
         flash('Пожалуйста заполните поля Имя пользователя и Пароль')
     return render_template('login.html')
@@ -89,7 +87,6 @@ def login():
 @app.route('/registration', methods=['GET', 'POST'] )
 def registration():
     name = request.form.get('name')
-    # role = request.form.getlist('role')
     email = request.form.get('e-mail')
     username = request.form.get('username')
     password = request.form.get('password')
@@ -99,13 +96,10 @@ def registration():
         if not (name or email or username or password or password2):
             flash ('Пожалуйста заполните все поля')
         elif password != password2:
-            flash('Пароли не совпадают')
+             flash('Пароли не совпадают')
         else:
             hash_pwd = generate_password_hash(password)
             new_user = User(name=name,email=email,username=username,password=hash_pwd, active=1)
-            # store the role
-            # role = Role.query.filter_by(id=request.form['role']).first()
-            # new_user.roles.append(role)
 
             db.session.add(new_user)
             db.session.commit()
@@ -159,9 +153,6 @@ def teacher():
         'email': current_user.email
     }
 
-    # Получение student_id для учеников, привязанных к этому учителю
-    #student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
-    #student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
 
     # Получаем результаты вместе с информацией о студентах для конкретного учителя
     students_results = db.session.query(
@@ -175,8 +166,6 @@ def teacher():
         Result.test_number == 4  # Фильтруем только итоговый тест
     ).all()
 
-    # Получение результатов тестов учеников
-    #students_results = Result.query.filter(Result.student_id.in_(student_ids),Result.test_number==4).all()
 
     return render_template('teacher.html', user_info=user_info, students_results=students_results)
 
@@ -192,5 +181,46 @@ class MyAdminIndexView(AdminIndexView):
         def inaccessible_callback(self, name, **kwargs):
             return redirect(url_for('login'))
         
-       
- 
+
+class ChangePasswordView(BaseView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.has_role('admin')
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('login'))
+
+    @expose('/')
+    def index(self):
+        users = User.query.all()
+        return self.render('admin/change_password.html', users=users)
+    
+    @expose('/change', methods=['POST'])
+    def change(self):
+        user_id = request.form.get('user_id')
+        new_password = request.form.get('new_password')
+        
+        if user_id and new_password:
+            user = User.query.get(user_id)
+            if user:
+                user.password = generate_password_hash(new_password)
+                db.session.commit()
+                flash('Пароль успешно изменен')
+            else:
+                flash('Пользователь не найден')
+        else:
+            flash('Заполните все поля')
+            
+        return redirect(url_for('.index'))
+
+
+class LogoutView(BaseView):
+    @expose('/')
+    def index(self):
+        logout_user()
+        return redirect(url_for('login'))
+
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.has_role('admin')
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('login'))
