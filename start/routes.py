@@ -160,15 +160,23 @@ def teacher():
     }
 
     # Получение student_id для учеников, привязанных к этому учителю
-    student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
-    student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
+    #student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
+    #student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
 
-    # Получение username для учеников
-    student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
-    student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
+    # Получаем результаты вместе с информацией о студентах для конкретного учителя
+    students_results = db.session.query(
+        Result, User
+    ).join(
+        User, Result.student_id == User.id  # Связываем Result с User
+    ).join(
+        TeacherStudent, TeacherStudent.student_id == User.id  # Связываем с таблицей TeacherStudent
+    ).filter(
+        TeacherStudent.teacher_id == current_user.id,  # Фильтруем по ID текущего учителя
+        Result.test_number == 4  # Фильтруем только итоговый тест
+    ).all()
 
     # Получение результатов тестов учеников
-    students_results = Result.query.filter(Result.student_id.in_(student_ids),Result.test_number==4).all()
+    #students_results = Result.query.filter(Result.student_id.in_(student_ids),Result.test_number==4).all()
 
     return render_template('teacher.html', user_info=user_info, students_results=students_results)
 

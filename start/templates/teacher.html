@@ -6,6 +6,28 @@
     <p>Email: {{ user_info.email }}</p>
     <p><a href="{{ url_for('static', filename='method.pdf') }}" class="btn btn-primary" download>Скачать методические материалы</a></p>
 
+    
+    <style>
+        .square {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin: 2px;
+            border: 1px solid #ddd;
+        }
+        .completed {
+            background-color: #28a745;
+        }
+        .not-completed {
+            background-color: #dc3545;
+        }
+        .results-container {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+    </style>
+
     <h2 class="text-center">Результаты итогового теста учеников</h2>
     <table class="table table-bordered">
         <thead>
@@ -16,12 +38,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for result in students_results %}
-                <tr>
-                    <td>{{ result.student_id }}</td>
-                    <td>{{ result.student_result }}</td>
-                    <td>{{ result.test_number }}</td>  <!-- Предполагается, что у вас есть поле score в модели -->
-                </tr>
+            {% for result, user in students_results %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <div class="results-container">
+                        {% for answer in result.student_result %}
+                            <div class="square {% if answer == '1' %}completed{% else %}not-completed{% endif %}" 
+                                 title="Вопрос {{ loop.index }}: {% if answer == '1' %}Верно{% else %}Неверно{% endif %}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
