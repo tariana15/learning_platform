@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
-from flask_admin.menu import MenuLink
+from flask_admin.form import Select2Widget
 from werkzeug.security import generate_password_hash
 import os
 
@@ -39,6 +39,7 @@ login_manager.login_view = 'login'
 
 
 from start.routes import MyAdminIndexView
+from start.models import User,Role, TeacherStudent
 class UserAdmin(ModelView):
     column_list = ('id', 'username', 'email', 'roles','active')
     form_columns = ('username', 'email', 'roles')
@@ -74,18 +75,54 @@ class RoleAdmin(ModelView):
         super(RoleAdmin, self).__init__(*args, **kwargs)
 
 
+class TeacherStudentAdmin(ModelView):
+    # Отображаемые колонки
+    column_list = ('teacher', 'student')
+    
+    # Колонки для формы
+    form_columns = ('teacher', 'student')
+    
+    # Улучшенные лейблы для колонок
+    column_labels = {
+        'teacher': 'Учитель',
+        'student': 'Ученик'
+    }
+    
+    # Настройка отображения связей
+    column_formatters = {
+        'teacher': lambda v, c, m, p: f"{m.teacher.username} ({m.teacher.email})",
+        'student': lambda v, c, m, p: f"{m.student.username} ({m.student.email})"
+    }
+    
+    # Настройка выпадающих списков
+    form_args = {
+        'teacher': {
+            'query_factory': lambda: User.query.join(User.roles).filter(Role.name == 'teacher').all(),
+            'widget': Select2Widget(),
+            'get_label': lambda u: f"{u.username} ({u.email})"  # Добавляем это
+        },
+        'student': {
+            'query_factory': lambda: User.query.join(User.roles).filter(Role.name == 'student').all(),
+            'widget': Select2Widget(),
+            'get_label': lambda u: f"{u.username} ({u.email})"  # И это
+        }
+    }
+    
+
 # Инициализация админки
 admin = Admin(app, name='Admin', template_mode='bootstrap4',index_view=MyAdminIndexView())
 
 # Добавьте эту строку в конфигурацию
 app.config['FLASK_ADMIN_SWATCH'] = 'cosmo'
 
-from start.models import User, Role
+from start.models import Role
 from start.routes import ChangePasswordView, LogoutView
 # Добавляем views
 admin.add_view(UserAdmin(User, db.session, name='Пользователи'))
 admin.add_view(RoleAdmin(Role, db.session, name='Роли'))
+admin.add_view(TeacherStudentAdmin(TeacherStudent, db.session, name='Учитель-Ученик'))
 admin.add_view(ChangePasswordView(name='Изменить пароль', endpoint='change_password'))
 admin.add_view(LogoutView(name='Выход', endpoint='admin_logout'))
+
 
 from start import routes, models
