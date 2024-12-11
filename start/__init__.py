@@ -1,9 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
+from werkzeug.security import generate_password_hash
 import os
 
 
@@ -46,6 +47,12 @@ class UserAdmin(ModelView):
     
     # Настройка отображения связей
     form_excluded_columns = ('password_hash',)  # если есть такое поле
+
+    # Хэширование пароля перед сохранением
+    def on_model_change(self, form, model, is_created):
+        # Если пароль был изменен или создается новый пользователь
+        if form.password.data:
+            model.password = generate_password_hash(form.password.data)
     
     # Настройка отношения roles
     form_widget_args = {

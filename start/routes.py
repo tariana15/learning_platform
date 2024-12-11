@@ -73,7 +73,12 @@ def login():
         if user and check_password_hash(user.password, password):
             login_user(user)
             # request.args.get('next')
-            return redirect('courses')
+            # Проверяем, является ли пользователь админом
+            if user.has_role('admin'):
+                return redirect(url_for('admin.index'))  # Перенаправление на админ-панель
+            else:
+                return redirect(url_for('courses'))  # Перенаправление обычных пользователей
+            
         else:
             flash('Имя пользователя или Пароль не корректен')
     else:
@@ -166,12 +171,20 @@ def teacher():
     # Создаем кастомный класс для главной страницы админки
 class MyAdminIndexView(AdminIndexView):
     @expose('/admin')
+    @login_required
     def admin(self):
-        return self.render('admin/index.html')
-       
-       #2. Добавлена проверка доступа к админке (только для пользователей с ролью admin)
-       # def is_accessible(self):
-       # return current_user.is_authenticated and current_user.has_role('admin')
+        #2. Добавлена проверка доступа к админке (только для пользователей с ролью admin)
+        def is_accessible(self):
+           return current_user.is_authenticated and current_user.has_role('admin')
 
-        #def inaccessible_callback(self, name, **kwargs):
-         #   return redirect(url_for('login'))
+        def inaccessible_callback(self, name, **kwargs):
+            return redirect(url_for('login'))
+        
+@app.route('/admin/logout', methods=['GET', 'POST'])
+@login_required
+def admin_logout():
+    logout_user()
+    return redirect(url_for('login'))
+        
+       
+ 
