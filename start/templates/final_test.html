@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-    <h1 class="text-center">Итоговый тест</h1>
-    <p>Пройдите итоговый тест по теме "Системы счисления" и проверьте свои знания.</p>
+    <h1 class="text-center">Итоговый тест по теме "Системы счисления"</h1>
     {% if current_user.has_role('student') and results_available and final_finished %}
     <form id="finalQuiz" action="/final_test" method="post">
         <div style="font-size:18px">
@@ -188,7 +187,7 @@
         </div>
     </form>
     {% else %}
-    <p>Итоговый тест недоступен. Пройдите все три курса.</p>
+    <p>Итоговый тест недоступен.</p>
     {% endif %}
     <script>
         document.getElementById('finalQuiz').addEventListener('submit', function (event) {
