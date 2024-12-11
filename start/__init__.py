@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_admin.contrib.sqla import ModelView
+from flask_admin import Admin
 import os
 
 
@@ -32,6 +34,45 @@ app.app_context().push()
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
+
+from start.routes import MyAdminIndexView
+class UserAdmin(ModelView):
+    column_list = ('id', 'username', 'email', 'roles')
+    form_columns = ('username', 'email', 'password', 'roles')
+    
+    # Удалим form_args и изменим способ настройки отношения
+    column_auto_select_related = True
+    
+    # Настройка отображения связей
+    form_excluded_columns = ('password_hash',)  # если есть такое поле
+    
+    # Настройка отношения roles
+    form_widget_args = {
+        'roles': {
+            'data-role': 'select2'  # использование select2 для удобного выбора
+        }
+    }
+
+class RoleAdmin(ModelView):
+# Исправляем списки отображаемых и редактируемых полей
+    column_list = ['id', 'name']  # используем списки вместо кортежей
+    form_columns = ['name']       # только поле name для формы
+    
+    def __init__(self, *args, **kwargs):
+        super(RoleAdmin, self).__init__(*args, **kwargs)
+
+
+# Инициализация админки
+admin = Admin(app, name='Admin', template_mode='bootstrap4',index_view=MyAdminIndexView())
+
+# Добавьте эту строку в конфигурацию
+app.config['FLASK_ADMIN_SWATCH'] = 'cosmo'
+
+from start.models import User, Role
+# Добавляем views
+admin.add_view(UserAdmin(User, db.session, name='Пользователи'))
+admin.add_view(RoleAdmin(Role, db.session, name='Роли'))
 
 #Регистрация путей Blueprint
 #from start.routes import main_bp

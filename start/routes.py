@@ -4,6 +4,7 @@ from flask_login import login_user, login_required, current_user, logout_user
 from start import app
 from start.models import db, User, login_manager, Role, Result, check_previous_results, save_results, TeacherStudent, final_result_available
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_admin import expose, AdminIndexView
 
 
 #main_bp = Blueprint('main_blueprint', __name__)
@@ -161,3 +162,16 @@ def teacher():
     students_results = Result.query.filter(Result.student_id.in_(student_ids),Result.test_number==4).all()
 
     return render_template('teacher.html', user_info=user_info, students_results=students_results)
+
+    # Создаем кастомный класс для главной страницы админки
+class MyAdminIndexView(AdminIndexView):
+    @expose('/admin')
+    def admin(self):
+        return self.render('admin/index.html')
+       
+       #2. Добавлена проверка доступа к админке (только для пользователей с ролью admin)
+       # def is_accessible(self):
+       # return current_user.is_authenticated and current_user.has_role('admin')
+
+        #def inaccessible_callback(self, name, **kwargs):
+         #   return redirect(url_for('login'))
