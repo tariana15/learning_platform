@@ -163,6 +163,10 @@ def teacher():
     student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
     student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
 
+    # Получение username для учеников
+    student_ids = db.session.query(TeacherStudent.student_id).filter_by(teacher_id=current_user.id).all()
+    student_ids = [student_id[0] for student_id in student_ids]  # Преобразование кортежей в список
+
     # Получение результатов тестов учеников
     students_results = Result.query.filter(Result.student_id.in_(student_ids),Result.test_number==4).all()
 
@@ -179,12 +183,6 @@ class MyAdminIndexView(AdminIndexView):
 
         def inaccessible_callback(self, name, **kwargs):
             return redirect(url_for('login'))
-        
-@app.route('/admin/logout', methods=['GET', 'POST'])
-@login_required
-def admin_logout():
-    logout_user()
-    return redirect(url_for('login'))
         
        
  

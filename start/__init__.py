@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
+from flask_admin.menu import MenuLink
 from werkzeug.security import generate_password_hash
 import os
 
@@ -80,6 +81,7 @@ from start.models import User, Role
 # Добавляем views
 admin.add_view(UserAdmin(User, db.session, name='Пользователи'))
 admin.add_view(RoleAdmin(Role, db.session, name='Роли'))
+admin.add_link(MenuLink(name='logout', url='/logout', category='Links'))
 
 #Регистрация путей Blueprint
 #from start.routes import main_bp
