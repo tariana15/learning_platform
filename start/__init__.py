@@ -40,20 +40,23 @@ login_manager.login_view = 'login'
 
 from start.routes import MyAdminIndexView
 class UserAdmin(ModelView):
-    column_list = ('id', 'username', 'email', 'roles')
-    form_columns = ('username', 'email', 'password', 'roles')
+    column_list = ('id', 'username', 'email', 'roles','active')
+    form_columns = ('username', 'email', 'roles')
     
     # Удалим form_args и изменим способ настройки отношения
     column_auto_select_related = True
     
     # Настройка отображения связей
-    form_excluded_columns = ('password_hash',)  # если есть такое поле
+    form_excluded_columns = ('password',)  # если есть такое поле
 
-    # Хэширование пароля перед сохранением
     def on_model_change(self, form, model, is_created):
-        # Если пароль был изменен или создается новый пользователь
-        if form.password.data:
-            model.password = generate_password_hash(form.password.data)
+        """
+        Этот метод вызывается перед сохранением модели
+        """
+        if is_created:
+            # Только для новых пользователей устанавливаем пароль по умолчанию
+            model.password = generate_password_hash('default_password')
+
     
     # Настройка отношения roles
     form_widget_args = {
@@ -78,14 +81,11 @@ admin = Admin(app, name='Admin', template_mode='bootstrap4',index_view=MyAdminIn
 app.config['FLASK_ADMIN_SWATCH'] = 'cosmo'
 
 from start.models import User, Role
+from start.routes import ChangePasswordView, LogoutView
 # Добавляем views
 admin.add_view(UserAdmin(User, db.session, name='Пользователи'))
 admin.add_view(RoleAdmin(Role, db.session, name='Роли'))
-admin.add_link(MenuLink(name='logout', url='/logout', category='Links'))
-
-#Регистрация путей Blueprint
-#from start.routes import main_bp
-#app.register_blueprint(main_bp, url_prefix="/")
-
+admin.add_view(ChangePasswordView(name='Изменить пароль', endpoint='change_password'))
+admin.add_view(LogoutView(name='Выход', endpoint='admin_logout'))
 
 from start import routes, models
